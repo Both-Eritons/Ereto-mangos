@@ -8,6 +8,7 @@ use App\Exceptions\Auth\Unauthorized as Unau;
 use App\Exceptions\User\UserDataException as UserData;
 use App\Exceptions\User\UserExistsExeception as UserExists;
 use App\Exceptions\User\UserNotExistsExeception as UserNotExists;
+use App\Http\Middleware\ForceJsonResponse;
 use Illuminate\Http\Request as Req;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -18,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->append(ForceJsonResponse::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function(Unau $e, Req $req) {
