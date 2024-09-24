@@ -2,10 +2,39 @@
 
 namespace App\Models\User;
 
+use App\Models\Favorite\Favorite;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as AuthUser;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
 
-class User extends Model
+class User extends AuthUser implements JWTSubject
 {
     use HasFactory;
+
+    public $fillable = [
+        "name",
+        "email",
+        "password"
+    ];
+
+    public $hidden = [
+        "password"
+    ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function favorites(): HasMany {
+        return $this->hasMany(Favorite::class);
+    }
 }
