@@ -7,6 +7,11 @@ use App\Repositories\User\Contract\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface {
 
+    public function createUser(array $data): ?User
+    {
+        return User::create($data);
+    }
+
     public function findByID(int $id): ?User
     {
         return User::find($id);
