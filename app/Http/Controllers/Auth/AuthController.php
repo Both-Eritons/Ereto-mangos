@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthController as ControllersAuthController;
 
-class AuthController extends Controller
+class AuthController extends ControllersAuthController
 {
     public function login() {
 
