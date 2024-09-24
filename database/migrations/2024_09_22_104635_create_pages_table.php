@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 24);
-            $table->string('email', 255)->unique();
+            $table->unsignedBigInteger('chapter_id');
+            $table->foreign('chapter_id')
+                  ->references('id')
+                  ->on('chapters')
+                  ->onDelete('cascade');
+            $table->integer('page_number');
+            $table->string('image_url');
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('pages');
     }
 };
