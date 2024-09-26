@@ -15,6 +15,9 @@ class Register {
     }
 
     public function execute(array $data) {
+        $user = $this->user->findByEmail($data['email']);
+
+        if($user) throw new UserExistsExeception();
 
         $user = $this->user->createUser($data);
 
