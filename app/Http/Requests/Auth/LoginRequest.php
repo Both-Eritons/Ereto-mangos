@@ -11,7 +11,9 @@ class LoginRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->guard()->check();
+        $isLogged = auth()->guard()->check();
+
+        return $isLogged ? false : true;
     }
 
     /**

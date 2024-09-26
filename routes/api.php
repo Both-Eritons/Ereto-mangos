@@ -14,7 +14,8 @@ Route::group([
     Route::post('register', [AuthController::class, 'register'])
         ->name('auth.register');
     Route::post('logout', []);
-    Route::get('myself', []);
+    Route::get('myself', [AuthController::class, 'myself'])
+        ->name('auth.myself');
 });
 
 Route::group([

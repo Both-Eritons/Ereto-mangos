@@ -11,7 +11,9 @@ class RegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $isLogged = auth()->guard()->check();
+
+        return $isLogged ? false : true;
     }
 
     /**

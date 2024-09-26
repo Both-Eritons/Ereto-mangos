@@ -57,7 +57,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $exceptions->render(function(AccessDenied $e, Req $req) {
                 return response()->json([
-                    "message" => "Ocorreu Algum problema...",
+                    "message" => "Acesso Não Permitido...",
                 ], 403);
         });
 
