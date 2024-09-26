@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\Auth\Login;
+use App\Actions\Auth\Register;
 use App\Http\Controllers\AuthController as ControllersAuthController;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\User\UserResource;
 
 class AuthController extends ControllersAuthController
 {
@@ -13,8 +16,14 @@ class AuthController extends ControllersAuthController
         return $this->respondWithToken($user);
     }
 
-    public function register() {
+    public function register(RegisterRequest $req, Register $register) {
+        $data = $req->validated();
+        $user = $register->execute($data);
 
+        return $this->respondWithUser(
+            "Encontrado",
+            200,
+            new UserResource($user));
     }
 
     public function myself() {
