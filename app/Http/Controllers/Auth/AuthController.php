@@ -21,8 +21,8 @@ class AuthController extends ControllersAuthController
         $user = $register->execute($data);
 
         return $this->respondWithUser(
-            "Encontrado",
-            200,
+            "Registrado",
+            201,
             new UserResource($user));
     }
 

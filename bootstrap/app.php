@@ -10,6 +10,7 @@ use App\Exceptions\User\UserExistsExeception as UserExists;
 use App\Exceptions\User\UserNotExistsExeception as UserNotExists;
 use App\Http\Middleware\ForceJsonResponse;
 use Illuminate\Http\Request as Req;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException as AccessDenied;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -53,5 +54,12 @@ return Application::configure(basePath: dirname(__DIR__))
                 ], $e->getCode());
             }
         });
+
+        $exceptions->render(function(AccessDenied $e, Req $req) {
+                return response()->json([
+                    "message" => "Ocorreu Algum problema...",
+                ], 403);
+        });
+
 
     })->create();
