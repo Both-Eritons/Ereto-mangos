@@ -2,6 +2,7 @@
 
 namespace App\Actions\Auth;
 
+use App\Exceptions\Auth\Unauthorized;
 
 class Logout {
 
@@ -14,10 +15,11 @@ class Logout {
         $check = auth()->guard()->check();
 
         if($check) {
-            return auth()->guard()->logout();
+            auth()->guard()->logout();
+            return ['message' => 'Desconectado com sucesso!'];
         }
 
-        return ["message" => "Você não Esta Autenticado!"];
+        return throw new Unauthorized();
     }
 
 }

@@ -11,10 +11,14 @@ Route::group([
 ], function() {
     Route::post('login', [AuthController::class, 'login'])
         ->name('auth.login');
+
     Route::post('register', [AuthController::class, 'register'])
         ->name('auth.register');
-    Route::post('logout', []);
-    Route::get('myself', [AuthController::class, 'myself'])
+
+    Route::post('logout', [AuthController::class, 'logout'])
+        ->name('auth.logout');
+
+    Route::post('myself', [AuthController::class, 'myself'])
         ->name('auth.myself');
 });
 
