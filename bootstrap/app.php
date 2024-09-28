@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\Auth\Authenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -60,6 +61,15 @@ return Application::configure(basePath: dirname(__DIR__))
                     "message" => "Acesso Não Permitido...",
                 ], 403);
         });
+
+        $exceptions->render(function(Authenticated $e, Req $req) {
+            if($req->is('api/*')) {
+                return response()->json([
+                    "message" => $e->getMessage(),
+                ], $e->getCode());
+            }
+        });
+
 
 
     })->create();
