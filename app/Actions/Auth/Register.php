@@ -6,6 +6,7 @@ use App\Exceptions\User\UserDataException;
 use App\Exceptions\User\UserExistsExeception;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Repositories\User\UserRepository;
+use Illuminate\Support\Facades\Hash;
 
 class Register {
 
@@ -15,6 +16,9 @@ class Register {
     }
 
     public function execute(array $data) {
+
+        $data['password'] = Hash::make($data['password']);
+
         $user = $this->user->findByEmail($data['email']);
 
         if($user) throw new UserExistsExeception();

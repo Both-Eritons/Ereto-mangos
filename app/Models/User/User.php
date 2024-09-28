@@ -15,7 +15,7 @@ class User extends AuthUser implements JWTSubject
     use HasFactory;
 
     public $fillable = [
-        "name",
+        "username",
         "email",
         "password"
     ];
