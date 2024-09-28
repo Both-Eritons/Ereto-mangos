@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Actions\Auth\Login;
+use App\Actions\Auth\Logout;
 use App\Actions\Auth\Myself;
 use App\Actions\Auth\Register;
 use App\Http\Controllers\AuthController as ControllersAuthController;
@@ -31,7 +32,7 @@ class AuthController extends ControllersAuthController
         return response()->json($myself->execute());
     }
 
-    public function logout() {
-
+    public function logout(Logout $logout) {
+        return response()->json($logout->execute());
     }
 }
