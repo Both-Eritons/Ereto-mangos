@@ -11,5 +11,8 @@ class MangaRepositoryi implements MangaContract{
 
     }
 
-
+    public function createManga(array $data)
+    {
+        return $this->manga::create($data);
+    }
 }
