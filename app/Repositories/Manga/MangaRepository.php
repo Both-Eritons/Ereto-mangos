@@ -15,4 +15,18 @@ class MangaRepositoryi implements MangaContract{
     {
         return $this->manga::create($data);
     }
+
+    public function findMangaById(int $id){
+        return $this->manga::find($id);
+    }
+
+    public function findMangaByTitle(string $title)
+    {
+        return $this->manga::where('title', $title)->first();
+    }
+
+    public function findMangasByAuthor(string $author)
+    {
+        return $this->manga::where('author', $author);
+    }
 }
