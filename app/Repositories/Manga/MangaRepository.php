@@ -29,4 +29,9 @@ class MangaRepository implements MangaContract{
     {
         return $this->manga::where('author', $author);
     }
+
+    public function findMangasByType(string $type)
+    {
+        return $this->manga::where('type', $type);
+    }
 }

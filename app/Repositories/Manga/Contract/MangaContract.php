@@ -7,4 +7,5 @@ interface MangaContract {
     public function findMangaByTitle(string $title);
     public function findMangaById(int $id);
     public function findMangasByAuthor(string $author);
+    public function findMangasByType(string $type);
 }
