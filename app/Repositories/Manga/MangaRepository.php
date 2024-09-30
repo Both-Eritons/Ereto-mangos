@@ -27,11 +27,11 @@ class MangaRepository implements MangaContract{
 
     public function findMangasByAuthor(string $author)
     {
-        return $this->manga::where('author', $author);
+        return $this->manga::where('author', $author)->get();
     }
 
     public function findMangasByType(string $type)
     {
-        return $this->manga::where('type', $type);
+        return $this->manga::where('type', $type)->get();
     }
 }

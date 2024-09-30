@@ -31,6 +31,10 @@ Route::group([
         ->name('manga.create');
     Route::get('find/id/{id}', [MangaController::class, 'findById'])
         ->name('manga.find.id');
+
+    Route::get('find/type/{type}',[MangaController::class,'findByType'])
+        ->name('manga.find.type');
+
     Route::post('logout', []);
     Route::post('myself', []);
 });
