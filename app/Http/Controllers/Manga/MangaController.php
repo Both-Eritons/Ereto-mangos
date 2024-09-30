@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manga;
 
 use App\Actions\Manga\CreateManga;
+use App\Actions\Manga\FindById;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MangaController as ControllersMangaController;
 use App\Http\Requests\Manga\CreateMangaRequest as CreateReq;
@@ -22,8 +23,15 @@ class MangaController extends ControllersMangaController
         ], 201);
     }
 
-    public function findById(Request $req) {
+    public function findById(Request $req, FindById $action) {
+        $id = (int) $req->id;
+        $action = $action->execute($id);
 
+        return response()->json([
+            'message' => 'Encontrado',
+            'httpStatus' => 200,
+            'manga' => $action
+        ], 200);
     }
 
     public function findMangasByType() {

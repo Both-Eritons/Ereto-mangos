@@ -6,6 +6,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 use App\Exceptions\Auth\Unauthorized as Unau;
+use App\Exceptions\Manga\MangaNotExistsException as MangaNotExists;
 use App\Exceptions\User\UserDataException as UserData;
 use App\Exceptions\User\UserExistsExeception as UserExists;
 use App\Exceptions\User\UserNotExistsExeception as UserNotExists;
@@ -70,6 +71,13 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
+        $exceptions->render(function(MangaNotExists $e, Req $req) {
+            if($req->is('api/*')) {
+                return response()->json([
+                    "message" => $e->getMessage(),
+                ], $e->getCode());
+            }
+        });
 
 
     })->create();

@@ -29,7 +29,7 @@ Route::group([
 ], function() {
     Route::post('create', [MangaController::class, 'create'])
         ->name('manga.create');
-    Route::get('find', [MangaController::class, 'findById'])
+    Route::get('find/id/{id}', [MangaController::class, 'findById'])
         ->name('manga.find.id');
     Route::post('logout', []);
     Route::post('myself', []);
