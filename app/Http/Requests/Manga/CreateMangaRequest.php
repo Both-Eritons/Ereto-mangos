@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Manga;
 
+use App\Enums\Manga\MangaType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateMangaRequest extends FormRequest
 {
@@ -11,6 +13,12 @@ class CreateMangaRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        $user = auth()->guard();
+
+        if($user->check()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -22,7 +30,9 @@ class CreateMangaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|min:3|max:200',
+            'type' => [Rule::enum(MangaType::class)],
+            'sinopse' => 'required|min:10|max:400',
         ];
     }
 }
