@@ -34,4 +34,32 @@ class MangaRepository implements MangaContract{
     {
         return $this->manga::where('type', $type)->get();
     }
+
+    public function setMangaType(int $id, string $type)
+    {
+        return $this->manga::where('id', $id)
+                    ->update(['type' => $type]);
+    }
+
+    public function setMangaTitle(int $id, string $title)
+    {
+        return $this->manga::where('id', $id)
+                    ->update(['title' => $title]);
+
+    }
+
+    public function setMangaAuthor(int $id, string $author)
+    {
+        return $this->manga::where('id', $id)
+                    ->update(['author' => $author]);
+
+    }
+
+    public function setMangaSinopse(int $id, string $sinopse)
+    {
+        return $this->manga::where('id', $id)
+                    ->update(['sinopse' => $sinopse]);
+
+    }
+
 }
