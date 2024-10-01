@@ -35,6 +35,11 @@ Route::group([
     Route::get('find/type/{type}',[MangaController::class,'findByType'])
         ->name('manga.find.type');
 
-    Route::post('logout', []);
+    Route::get('find/author/{author}',
+        [MangaController::class,'findByAuthor'])
+        ->name('manga.find.author');
+
+    Route::post('update/{update}', [MangaController::class, 'update'])
+        ->name('manga.update');
     Route::post('myself', []);
 });
