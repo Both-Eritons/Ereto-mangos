@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manga;
 
 use App\Actions\Manga\CreateManga;
+use App\Actions\Manga\FindByAuthor;
 use App\Actions\Manga\FindById;
 use App\Actions\Manga\FindByTypes;
 use App\Http\Controllers\Controller;
@@ -42,7 +43,19 @@ class MangaController extends ControllersMangaController
         return response()->json([
             'message' => 'Encontrado',
             'httpStatus' => 200,
-            'manga' => $manga
+            'mangas' => $manga
         ], 200);
     }
+
+    public function findByAuthor(Request $req, FindByAuthor $action) {
+        $author = (string) $req->author;
+        $manga = $action->execute($author);
+
+        return response()->json([
+            'message' => 'Encontrado',
+            'httpStatus' => 200,
+            'mangas' => $manga
+        ], 200);
+    }
+
 }
