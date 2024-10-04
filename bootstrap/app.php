@@ -8,12 +8,14 @@ use Illuminate\Foundation\Configuration\Middleware;
 use App\Exceptions\Auth\Unauthorized as Unau;
 use App\Exceptions\Manga\MangaNotExistsException as MangaNotExists;
 use App\Exceptions\Manga\TypeNotExistsException as TypeNotExist;
+use App\Exceptions\Manga\UpdateFieldNotExistsException as UpdateField;
 use App\Exceptions\User\UserDataException as UserData;
 use App\Exceptions\User\UserExistsExeception as UserExists;
 use App\Exceptions\User\UserNotExistsExeception as UserNotExists;
 use App\Http\Middleware\ForceJsonResponse;
 use Illuminate\Http\Request as Req;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException as AccessDenied;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException as NotFound;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -26,6 +28,15 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(ForceJsonResponse::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
+
+        $exceptions->render(function(NotFound $e, Req $req) {
+            if($req->is('api/*')) {
+                return response()->json([
+                    "message" => 'Essa rota não existe.',
+                ], 404);
+            }
+        });
+
         $exceptions->render(function(Unau $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
@@ -81,6 +92,14 @@ return Application::configure(basePath: dirname(__DIR__))
         });
 
         $exceptions->render(function(TypeNotExist $e, Req $req) {
+            if($req->is('api/*')) {
+                return response()->json([
+                    "message" => $e->getMessage(),
+                ], $e->getCode());
+            }
+        });
+
+        $exceptions->render(function(UpdateField $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),

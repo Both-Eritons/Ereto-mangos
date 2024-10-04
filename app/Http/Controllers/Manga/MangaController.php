@@ -6,9 +6,14 @@ use App\Actions\Manga\CreateManga;
 use App\Actions\Manga\FindByAuthor;
 use App\Actions\Manga\FindById;
 use App\Actions\Manga\FindByTypes;
-use App\Http\Controllers\Controller;
+use App\Actions\Manga\UpdateType;
+use App\Actions\Manga\UpdateTitle;
+use App\Actions\Manga\UpdateAuthor;
+use App\Actions\Manga\UpdateSinopse;
+
 use App\Http\Controllers\MangaController as ControllersMangaController;
 use App\Http\Requests\Manga\CreateMangaRequest as CreateReq;
+use App\Http\Requests\Manga\UpdateMangaRequest as UMR;
 use Illuminate\Http\Request;
 
 class MangaController extends ControllersMangaController
@@ -43,7 +48,7 @@ class MangaController extends ControllersMangaController
         return response()->json([
             'message' => 'Encontrado',
             'httpStatus' => 200,
-            'mangas' => $manga
+            'manga' => $manga
         ], 200);
     }
 
@@ -54,8 +59,49 @@ class MangaController extends ControllersMangaController
         return response()->json([
             'message' => 'Encontrado',
             'httpStatus' => 200,
-            'mangas' => $manga
+            'manga' => $manga
         ], 200);
     }
+
+    public function updateTitle(UMR $req, UpdateTitle $action) {
+
+        $manga = $action->execute($req);
+
+        return response()->json([
+            'message' => 'Manga Atualizado',
+            'httpStatus' => 200,
+        ], 200);
+    }
+
+    public function updateAuthor(UMR $req, UpdateAuthor $action) {
+
+        $manga = $action->execute($req);
+
+        return response()->json([
+            'message' => 'Manga Atualizado',
+            'httpStatus' => 200,
+        ], 200);
+    }
+
+    public function updateType(UMR $req, UpdateType $action) {
+
+        $manga = $action->execute($req);
+
+        return response()->json([
+            'message' => 'Manga Atualizado',
+            'httpStatus' => 200,
+        ], 200);
+    }
+
+    public function updateSinopse(UMR $req, UpdateSinopse $action) {
+
+        $manga = $action->execute($req);
+
+        return response()->json([
+            'message' => 'Manga Atualizado',
+            'httpStatus' => 200,
+        ], 200);
+    }
+
 
 }

@@ -39,7 +39,16 @@ Route::group([
         [MangaController::class,'findByAuthor'])
         ->name('manga.find.author');
 
-    Route::post('update/{update}', [MangaController::class, 'update'])
-        ->name('manga.update');
+    Route::post('update/title', [MangaController::class,'updateTitle'])
+        ->name('manga.update.title');
+    Route::post('update/author', [MangaController::class,'updateAuthor'])
+        ->name('manga.update.author');
+
+    Route::post('update/type', [MangaController::class, 'updateType'])
+        ->name('manga.update.type');
+    Route::post('update/sinopse',[MangaController::class,'updateSinopse'])
+        ->name('manga.update.sinopse');
+
+
     Route::post('myself', []);
 });
