@@ -65,7 +65,7 @@ class MangaController extends ControllersMangaController
 
     public function updateTitle(UMR $req, UpdateTitle $action) {
 
-        $manga = $action->execute($req);
+        $manga = $action->execute($req->validated());
 
         return response()->json([
             'message' => 'Manga Atualizado',
@@ -75,7 +75,7 @@ class MangaController extends ControllersMangaController
 
     public function updateAuthor(UMR $req, UpdateAuthor $action) {
 
-        $manga = $action->execute($req);
+        $manga = $action->execute($req->validated());
 
         return response()->json([
             'message' => 'Manga Atualizado',
@@ -85,7 +85,7 @@ class MangaController extends ControllersMangaController
 
     public function updateType(UMR $req, UpdateType $action) {
 
-        $manga = $action->execute($req);
+        $manga = $action->execute($req->validated());
 
         return response()->json([
             'message' => 'Manga Atualizado',
@@ -95,7 +95,7 @@ class MangaController extends ControllersMangaController
 
     public function updateSinopse(UMR $req, UpdateSinopse $action) {
 
-        $manga = $action->execute($req);
+        $manga = $action->execute($req->validated());
 
         return response()->json([
             'message' => 'Manga Atualizado',

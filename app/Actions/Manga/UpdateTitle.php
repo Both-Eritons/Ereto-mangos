@@ -13,8 +13,7 @@ class UpdateTitle {
     {
     }
 
-    public function execute(Request $req) {
-        $data = $req->validated();
+    public function execute(array $data) {
         $id = $data['id'];
         $value = $data['new_value'];
 
