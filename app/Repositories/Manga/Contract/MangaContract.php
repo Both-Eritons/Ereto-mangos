@@ -13,4 +13,6 @@ interface MangaContract {
     public function setMangaTitle(int $id, string $title);
     public function setMangaType(int $id, string $type);
     public function setMangaSinopse(int $id, string $sinopse);
+
+    public function deleteMangaById(int $id): bool;
 }
