@@ -62,4 +62,11 @@ class MangaRepository implements MangaContract{
 
     }
 
+    public function deleteMangaById(int $id): bool
+    {
+        $manga = $this->manga::where('id', $id)->delete();
+
+        return $manga;
+    }
+
 }
