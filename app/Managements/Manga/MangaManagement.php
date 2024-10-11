@@ -28,5 +28,4 @@ class MangaManagement {
         return $this->disk->deleteDirectory($dir);
     }
 
-
 }
