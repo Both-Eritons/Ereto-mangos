@@ -32,7 +32,7 @@ Route::group([
     Route::get('find/id/{id}', [MangaController::class, 'findById'])
         ->name('manga.find.id');
 
-    Route::get('find/type/{type}',[MangaController::class,'findByType'])
+    Route::get('find/type/{type}',[MangaController::class,'findByTypes'])
         ->name('manga.find.type');
 
     Route::get('find/author/{author}',

@@ -2,106 +2,74 @@
 
 namespace App\Http\Controllers\Manga;
 
-use App\Actions\Manga\CreateManga;
-use App\Actions\Manga\FindByAuthor;
-use App\Actions\Manga\FindById;
-use App\Actions\Manga\FindByTypes;
-use App\Actions\Manga\UpdateType;
-use App\Actions\Manga\UpdateTitle;
-use App\Actions\Manga\UpdateAuthor;
-use App\Actions\Manga\UpdateSinopse;
+use App\Actions\Manga\{
 
-use App\Http\Controllers\MangaController as ControllersMangaController;
-use App\Http\Requests\Manga\CreateMangaRequest as CreateReq;
-use App\Http\Requests\Manga\UpdateMangaRequest as UMR;
+    CreateManga,
+    FindByAuthor,
+    FindById,
+    FindByTypes,
+    UpdateType,
+    UpdateTitle,
+    UpdateAuthor,
+    UpdateSinopse,
+};
+
+use App\Http\{
+    Controllers\MangaController as Controller,
+    Requests\Manga\CreateMangaRequest as CreateReq,
+    Requests\Manga\UpdateMangaRequest as UMR,
+
+};
+use App\Http\Resources\Manga\MangaResource;
 use Illuminate\Http\Request;
 
-class MangaController extends ControllersMangaController
+class MangaController extends Controller
 {
-    public function create(CreateReq $req, CreateManga $manga) {
+    public function create(CreateReq $req, CreateManga $action) {
         $data = $req->validated();
-
-        $result = $manga->execute($data);
-
-        return response()->json([
-            'message' => 'Manga Criado',
-            'httpStatus' => 201,
-            'manga' => $result,
-        ], 201);
+        $result = $action->execute($data);
+        $rsc = new MangaResource($result);
+        return $this->respondManga('Manga Criado', 201, $rsc);
     }
 
     public function findById(Request $req, FindById $action) {
         $id = (int) $req->id;
-        $action = $action->execute($id);
-
-        return response()->json([
-            'message' => 'Encontrado',
-            'httpStatus' => 200,
-            'manga' => $action
-        ], 200);
+        $result = $action->execute($id);
+        $rsc = new MangaResource($result);
+        return $this->respondManga('Manga Encontrado', 200, $rsc);
     }
 
-    public function findByType(Request $req, FindByTypes $action) {
+    public function findByTypes(Request $req, FindByTypes $action) {
         $type = (string) $req->type;
-        $manga = $action->execute($type);
-
-        return response()->json([
-            'message' => 'Encontrado',
-            'httpStatus' => 200,
-            'manga' => $manga
-        ], 200);
+        $result = $action->execute($type);
+        $rsc = new MangaResource($result);
+        return $this->respondManga('Manga Encontrado', 200, $rsc);
     }
 
     public function findByAuthor(Request $req, FindByAuthor $action) {
         $author = (string) $req->author;
-        $manga = $action->execute($author);
-
-        return response()->json([
-            'message' => 'Encontrado',
-            'httpStatus' => 200,
-            'manga' => $manga
-        ], 200);
+        $result = $action->execute($author);
+        $rsc = new MangaResource($result);
+        return $this->respondManga('Manga Encontrado', 200, $rsc);
     }
 
     public function updateTitle(UMR $req, UpdateTitle $action) {
-
-        $manga = $action->execute($req->validated());
-
-        return response()->json([
-            'message' => 'Manga Atualizado',
-            'httpStatus' => 200,
-        ], 200);
+        $action->execute($req->validated());
+        return $this->respondManga('Manga Atualizado', 200);
     }
 
     public function updateAuthor(UMR $req, UpdateAuthor $action) {
-
-        $manga = $action->execute($req->validated());
-
-        return response()->json([
-            'message' => 'Manga Atualizado',
-            'httpStatus' => 200,
-        ], 200);
+        $action->execute($req->validated());
+        return $this->respondManga('Manga Atualizado', 200);
     }
 
     public function updateType(UMR $req, UpdateType $action) {
-
-        $manga = $action->execute($req->validated());
-
-        return response()->json([
-            'message' => 'Manga Atualizado',
-            'httpStatus' => 200,
-        ], 200);
+        $action->execute($req->validated());
+        return $this->respondManga('Manga Atualizado', 200);
     }
 
     public function updateSinopse(UMR $req, UpdateSinopse $action) {
-
-        $manga = $action->execute($req->validated());
-
-        return response()->json([
-            'message' => 'Manga Atualizado',
-            'httpStatus' => 200,
-        ], 200);
+        $action->execute($req->validated());
+        return $this->respondManga('Manga Atualizado', 200);
     }
-
-
 }
