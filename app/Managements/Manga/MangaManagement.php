@@ -18,9 +18,15 @@ class MangaManagement {
         ]);
     }
 
-    public function CreateMangaFolder(string $title): bool
+    public function CreateMangaFolder(string $dir): bool
     {
-        return $this->disk->makeDirectory($title);
+        return $this->disk->makeDirectory($dir);
     }
+
+    public function deleteMangaFolder(string $dir): bool
+    {
+        return $this->disk->deleteDirectory($dir);
+    }
+
 
 }
