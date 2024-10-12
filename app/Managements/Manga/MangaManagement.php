@@ -8,12 +8,11 @@ class MangaManagement {
 
     private $disk;
     public function __construct(
-        string $driver = 'local',
-        string $path = ''
+        string $path = 'mangas'
     )
     {
         $this->disk = Storage::build([
-            'driver' => $driver,
+            'driver' => 'local',
             'root' => $path
         ]);
     }
@@ -28,4 +27,8 @@ class MangaManagement {
         return $this->disk->deleteDirectory($dir);
     }
 
+    public function findMangaById(string $dir): bool
+    {
+        return $this->disk->exists($dir);
+    }
 }
