@@ -36,27 +36,27 @@ class MangaRepository implements MangaContract{
         return $this->manga::where('type', $type)->get();
     }
 
-    public function setMangaType(int $id, string $type): ?Manga
+    public function setMangaType(int $id, string $type): ?bool
     {
         return $this->manga::where('id', $id)
                     ->update(['type' => $type]);
     }
 
-    public function setMangaTitle(int $id, string $title): ?Manga
+    public function setMangaTitle(int $id, string $title): ?bool
     {
         return $this->manga::where('id', $id)
                     ->update(['title' => $title]);
 
     }
 
-    public function setMangaAuthor(int $id, string $author): ?Manga
+    public function setMangaAuthor(int $id, string $author): ?bool
     {
         return $this->manga::where('id', $id)
                     ->update(['author' => $author]);
 
     }
 
-    public function setMangaSinopse(int $id, string $sinopse): ?Manga
+    public function setMangaSinopse(int $id, string $sinopse): ?bool
     {
         return $this->manga::where('id', $id)
                     ->update(['sinopse' => $sinopse]);
@@ -65,9 +65,7 @@ class MangaRepository implements MangaContract{
 
     public function deleteMangaById(int $id): bool
     {
-        $manga = $this->manga::where('id', $id)->delete();
-
-        return $manga;
+        return $this->manga::where('id', $id)->delete();
     }
 
 }

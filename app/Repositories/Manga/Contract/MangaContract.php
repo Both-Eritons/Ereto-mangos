@@ -12,10 +12,10 @@ interface MangaContract {
     public function findMangasByAuthor(string $author): ?Collection;
     public function findMangasByType(string $type): ?Collection;
 
-    public function setMangaAuthor(int $id, string $author): ?Manga;
-    public function setMangaTitle(int $id, string $title): ?Manga;
-    public function setMangaType(int $id, string $type): ?Manga;
-    public function setMangaSinopse(int $id, string $sinopse): ?Manga;
+    public function setMangaAuthor(int $id, string $author): ?bool;
+    public function setMangaTitle(int $id, string $title): ?bool;
+    public function setMangaType(int $id, string $type): ?bool;
+    public function setMangaSinopse(int $id, string $sinopse): ?bool;
 
     public function deleteMangaById(int $id): bool;
 }

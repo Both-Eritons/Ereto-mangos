@@ -17,6 +17,7 @@ class MangaResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'sinopse' => $this->sinopse,
             'type' => $this->type,
             'author' => $this->author,
             'cover_image' => $this->cover_image
