@@ -51,16 +51,14 @@ class MangaController extends Controller
     {
         $type = (string) $req->type;
         $result = $action->execute($type);
-        $rsc = new MangaResource($result);
-        return $this->respondManga('Manga Encontrado', 200, $rsc);
+        return $this->respondManga('Manga Encontrado', 200, $result);
     }
 
     public function findByAuthor(Request $req, FindByAuthor $action)
     {
         $author = (string) $req->author;
         $result = $action->execute($author);
-        $rsc = new MangaResource($result);
-        return $this->respondManga('Manga Encontrado', 200, $rsc);
+        return $this->respondManga('Manga Encontrado', 200, $result);
     }
 
     public function updateTitle(UMR $req, UpdateTitle $action)

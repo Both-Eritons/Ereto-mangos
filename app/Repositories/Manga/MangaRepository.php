@@ -4,6 +4,7 @@ namespace App\Repositories\Manga;
 
 use App\Models\Manga\Manga;
 use App\Repositories\Manga\Contract\MangaContract;
+use Illuminate\Database\Eloquent\Collection;
 
 class MangaRepository implements MangaContract{
     public function __construct(private Manga $manga)
@@ -25,12 +26,12 @@ class MangaRepository implements MangaContract{
         return $this->manga::where('title', $title)->first();
     }
 
-    public function findMangasByAuthor(string $author): ?Manga
+    public function findMangasByAuthor(string $author): ?Collection
     {
         return $this->manga::where('author', $author)->get();
     }
 
-    public function findMangasByType(string $type): ?Manga
+    public function findMangasByType(string $type): ?Collection
     {
         return $this->manga::where('type', $type)->get();
     }
