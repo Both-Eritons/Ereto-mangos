@@ -6,12 +6,12 @@ use App\Actions\Auth\Login;
 use App\Actions\Auth\Logout;
 use App\Actions\Auth\Myself;
 use App\Actions\Auth\Register;
-use App\Http\Controllers\AuthController as ControllersAuthController;
+use App\Http\Controllers\AuthBase;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\User\UserResource;
 
-class AuthController extends ControllersAuthController
+class AuthController extends AuthBase
 {
     public function login(LoginRequest $req, Login $login) {
         $user = (string) $login->execute($req);

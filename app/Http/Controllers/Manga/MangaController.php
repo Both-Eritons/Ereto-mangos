@@ -16,7 +16,7 @@ use App\Actions\Manga\{
 };
 
 use App\Http\{
-    Controllers\MangaController as Controller,
+    Controllers\MangaBase,
     Requests\Manga\CreateMangaRequest as CreateReq,
     Requests\Manga\UpdateMangaRequest as UMR,
 
@@ -24,7 +24,7 @@ use App\Http\{
 use App\Http\Resources\Manga\MangaResource;
 use Illuminate\Http\Request;
 
-class MangaController extends Controller
+class MangaController extends MangaBase
 {
     public function create(CreateReq $req, CreateManga $action)
     {

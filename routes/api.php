@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Chapter\ChapterController;
 use App\Http\Controllers\Manga\MangaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,8 @@ Route::group([
         ->name('manga.update.type');
     Route::post('update/sinopse',[MangaController::class,'updateSinopse'])
         ->name('manga.update.sinopse');
+
+    Route::post('chapter', [ChapterController::class, 'postChapter'])
+        ->name('chapter.creats');
 
 });
