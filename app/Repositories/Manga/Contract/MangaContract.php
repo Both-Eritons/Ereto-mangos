@@ -2,17 +2,19 @@
 
 namespace App\Repositories\Manga\Contract;
 
-interface MangaContract {
-    public function createManga(array $data);
-    public function findMangaByTitle(string $title);
-    public function findMangaById(int $id);
-    public function findMangasByAuthor(string $author);
-    public function findMangasByType(string $type);
+use App\Models\Manga\Manga;
 
-    public function setMangaAuthor(int $id, string $author);
-    public function setMangaTitle(int $id, string $title);
-    public function setMangaType(int $id, string $type);
-    public function setMangaSinopse(int $id, string $sinopse);
+interface MangaContract {
+    public function createManga(array $data): ?Manga;
+    public function findMangaByTitle(string $title): ?Manga;
+    public function findMangaById(int $id): ?Manga;
+    public function findMangasByAuthor(string $author): ?Manga;
+    public function findMangasByType(string $type): ?Manga;
+
+    public function setMangaAuthor(int $id, string $author): ?Manga;
+    public function setMangaTitle(int $id, string $title): ?Manga;
+    public function setMangaType(int $id, string $type): ?Manga;
+    public function setMangaSinopse(int $id, string $sinopse): ?Manga;
 
     public function deleteMangaById(int $id): bool;
 }
