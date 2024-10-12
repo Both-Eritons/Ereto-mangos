@@ -29,6 +29,9 @@ Route::group([
 ], function() {
     Route::post('create', [MangaController::class, 'create'])
         ->name('manga.create');
+    Route::delete('delete/{id}', [MangaController::class, 'deleteById'])
+        ->name('manga.delete');
+
     Route::get('find/id/{id}', [MangaController::class, 'findById'])
         ->name('manga.find.id');
 
@@ -49,6 +52,4 @@ Route::group([
     Route::post('update/sinopse',[MangaController::class,'updateSinopse'])
         ->name('manga.update.sinopse');
 
-
-    Route::post('myself', []);
 });
