@@ -54,6 +54,7 @@ Route::group([
         ->name('manga.update.sinopse');
 
     Route::post('chapter', [ChapterController::class, 'postChapter'])
-        ->name('chapter.create');
+        ->name('chapter.create')
+        ->middleware('UploadMiddleware');
 
 });

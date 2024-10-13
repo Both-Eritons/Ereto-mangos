@@ -12,7 +12,7 @@ class CreateChapter
     }
 
     public function execute(array $data) {
-        $chapter = $this->chapter->create($data);
-        return $chapter;
+        //$chapter = $this->chapter->create($data);
+
     }
 }
