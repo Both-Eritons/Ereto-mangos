@@ -22,7 +22,8 @@ class UploadChapterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'images' => 'required|image|mimes:jpeg,jpg|max:2048',
+            'images' => 'required|array|min:1|max:20',
+            'images.*' => 'required|mimetypes:image/jpeg|max:2048'
         ];
     }
 }
