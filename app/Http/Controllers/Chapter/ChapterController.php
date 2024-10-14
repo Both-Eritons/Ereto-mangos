@@ -16,7 +16,13 @@ class ChapterController extends ChapterBase
     public function __construct() {}
     public function postChapter(Request $req, CreateChapter $action)
     {
-        $action->execute($req->validated());
+        $array = [
+            'images' => $req->validated()['images'],
+            'slug' => $req->slug,
+            'chapter' => $req->chapter_number,
+        ];
+
+        $action->execute($array);
         return response('...');
     }
 }
