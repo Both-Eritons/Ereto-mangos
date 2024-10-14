@@ -12,6 +12,6 @@ class CreateChapter
     }
 
     public function execute(array $data) {
-
+        var_dump($data);
     }
 }

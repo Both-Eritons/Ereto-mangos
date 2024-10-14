@@ -12,16 +12,7 @@
 <form method="POST" action="api/manga/chapters/1/upload" enctype="multipart/form-data" >
 {{ csrf_field() }}
 <div >
-<label>Name</label>
-<input type="number" name="manga_id" placeholder="ID do manga">
-<label>Discription</label>
-<input type="number" name="number" placeholder="numero do capitulo">
-<label>Titulo</label>
-<input type="text" name="title" placeholder="texto do capitulo">
-
-</div>
-<div >
-<label>Choose Images</label>
+<label>escolha os capitulos</label>
 <input type="file"  name="images[]" multiple>
 </div>
 <hr>
