@@ -53,7 +53,7 @@ Route::group([
     Route::post('update/sinopse',[MangaController::class,'updateSinopse'])
         ->name('manga.update.sinopse');
 
-    Route::post('chapters/upload/{manga_id}/{chapter_number}',
+    Route::post('chapters/upload/{slug}/{chapter_number}',
         [ChapterController::class, 'postChapter'])
         ->name('chapter.upload');
 });
