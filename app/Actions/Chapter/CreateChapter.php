@@ -12,7 +12,6 @@ class CreateChapter
     }
 
     public function execute(array $data) {
-        //$chapter = $this->chapter->create($data);
 
     }
 }
