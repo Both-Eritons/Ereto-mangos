@@ -22,9 +22,7 @@ class UploadChapterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'manga_id' => 'required|int|min:1',
-            'title' => 'string|min:3|max:30',
-            'number' => 'required|int',
+            'images.*' => 'required|image|mimes:jpeg,jpg|max:2048',
         ];
     }
 }

@@ -9,7 +9,7 @@
 <div>
 <h3>Upload a Images</h3>
 <hr>
-<form method="POST" action="api/manga/chapter" enctype="multipart/form-data" >
+<form method="POST" action="api/manga/chapters/1/upload" enctype="multipart/form-data" >
 {{ csrf_field() }}
 <div >
 <label>Name</label>
@@ -22,7 +22,7 @@
 </div>
 <div >
 <label>Choose Images</label>
-<input type="file"  name="images" multiple>
+<input type="file"  name="images[]" multiple>
 </div>
 <hr>
 <button type="submit" >Submit</button>
