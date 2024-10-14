@@ -35,12 +35,12 @@ class MangaManagement {
         return $this->disk->exists($this->path.Str::slug($dir));
     }
 
-    public function CreateChapter(string $manga, string $dir): bool
+    public function CreateChapter(string $slug, string $chapter): bool
     {
-        $manga = Str::slug($manga);
-        $dir = Str::slug($dir);
+        $manga = Str::slug($slug);
+        $dir = Str::slug($chapter);
         return $this->disk->makeDirectory(
-            $this->path."$manga/chapters/$dir"
+            $this->path."$manga/chapters/$chapter"
         );
     }
 }
