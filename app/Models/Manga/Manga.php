@@ -16,6 +16,7 @@ class Manga extends Model
 
     public $fillable = [
         'title',
+        'slug',
         'type',
         'author',
         'sinopse',
