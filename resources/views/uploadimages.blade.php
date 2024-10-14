@@ -9,7 +9,7 @@
 <div>
 <h3>Upload a Images</h3>
 <hr>
-<form method="POST" action="api/manga/chapters/1/upload" enctype="multipart/form-data" >
+<form method="POST" action="api/manga/chapters/upload/1/1" enctype="multipart/form-data" >
 {{ csrf_field() }}
 <div >
 <label>escolha os capitulos</label>
