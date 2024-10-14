@@ -22,7 +22,7 @@ class ChapterController extends ChapterBase
             'chapter' => $req->chapter_number,
         ];
 
-        $action->execute($array);
-        return response('...');
+        $result = $action->execute($array);
+        return response($result, 201);
     }
 }

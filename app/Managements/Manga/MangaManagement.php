@@ -2,6 +2,7 @@
 
 namespace App\Managements\Manga;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -38,9 +39,20 @@ class MangaManagement {
     public function CreateChapter(string $slug, string $chapter): bool
     {
         $manga = Str::slug($slug);
-        $dir = Str::slug($chapter);
         return $this->disk->makeDirectory(
             $this->path."$manga/chapters/$chapter"
         );
+    }
+
+    public function saveChapter(
+        string $slug,
+        string $chapter,
+        UploadedFile|array|string|null $image
+    ): bool
+    {
+        $manga = Str::slug($slug);
+        $path = $this->path."$manga/chapters/$chapter/";
+        return $this->disk->putFileAs($path, $image,
+            $image->getClientOriginalName());
     }
 }
