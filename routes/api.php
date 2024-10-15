@@ -43,14 +43,18 @@ Route::group([
         [MangaController::class,'findByAuthor'])
         ->name('manga.find.author');
 
-    Route::post('update/title', [MangaController::class,'updateTitle'])
+    Route::get('find/slug/{slug}',
+        [MangaController::class,'findBySlug'])
+        ->name('manga.find.slug');
+
+    Route::patch('update/title', [MangaController::class,'updateTitle'])
         ->name('manga.update.title');
-    Route::post('update/author', [MangaController::class,'updateAuthor'])
+    Route::patch('update/author', [MangaController::class,'updateAuthor'])
         ->name('manga.update.author');
 
-    Route::post('update/type', [MangaController::class, 'updateType'])
+    Route::patch('update/type', [MangaController::class, 'updateType'])
         ->name('manga.update.type');
-    Route::post('update/sinopse',[MangaController::class,'updateSinopse'])
+    Route::patch('update/sinopse',[MangaController::class,'updateSinopse'])
         ->name('manga.update.sinopse');
 
     Route::post('chapters/upload/{slug}/{chapter_number}',
