@@ -13,10 +13,9 @@ class FindByTitle
 
     public function execute(string $title)
     {
-        $manga = $this->manga->findMangasByTitle($title);
+        $manga = $this->manga->findMangaByTitle($title);
 
-        if(!count($manga))
-            throw new MangaNotExistsException('Sem Resultados');
+        if(!$manga) throw new MangaNotExistsException('Sem Resultados');
 
         return $manga;
     }

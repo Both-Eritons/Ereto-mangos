@@ -47,6 +47,10 @@ Route::group([
         [MangaController::class,'findBySlug'])
         ->name('manga.find.slug');
 
+    Route::get('find/title/{title}',
+        [MangaController::class,'findByTitle'])
+        ->name('manga.find.title');
+
     Route::patch('update/title', [MangaController::class,'updateTitle'])
         ->name('manga.update.title');
     Route::patch('update/author', [MangaController::class,'updateAuthor'])

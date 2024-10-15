@@ -13,11 +13,8 @@ class FindBySlug
 
     public function execute(string $slug)
     {
-        $manga = $this->manga->findMangasBySlug($slug);
-
-        if(!count($manga))
-            throw new MangaNotExistsException('Sem Resultados');
-
+        $manga = $this->manga->findMangaBySlug($slug);
+        if(!$manga) throw new MangaNotExistsException('Sem Resultados');
         return $manga;
     }
 }

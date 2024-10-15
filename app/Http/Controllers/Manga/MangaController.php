@@ -9,6 +9,7 @@ use App\Actions\Manga\{
     FindByAuthor,
     FindBySlug,
     FindById,
+    FindByTitle,
     FindByTypes,
     UpdateType,
     UpdateTitle,
@@ -64,9 +65,16 @@ class MangaController extends MangaBase
 
     public function findBySlug(Request $req, FindBySlug $action)
     {
-        $slug = (string) $req->Slug;
-        $result = $action->execute($slug);
-        return $this->respondManga('Manga Encontrado', 200, $result);
+        $result = $action->execute((string) $req->Slug);
+        $rsc = new MangaResource($result);
+        return $this->respondManga('Manga Encontrado', 200, $rsc);
+    }
+
+    public function findByTitle(Request $req, FindByTitle $action)
+    {
+        $result = $action->execute((string) $req->title);
+        $rsc = new MangaResource($result);
+        return $this->respondManga('Manga Encontrado', 200, $rsc);
     }
 
     public function updateTitle(UMR $req, UpdateTitle $action)
