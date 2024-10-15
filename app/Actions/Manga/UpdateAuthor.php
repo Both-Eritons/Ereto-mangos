@@ -3,20 +3,20 @@
 namespace App\Actions\Manga;
 
 use App\Exceptions\Manga\MangaNotExistsException;
-use App\Http\Requests\Manga\UpdateMangaRequest as Request;
 use App\Repositories\Manga\MangaRepository;
 
-class UpdateAuthor {
+class UpdateAuthor
+{
 
 
-    public function __construct(private MangaRepository $manga)
+    public function __construct(
+        private MangaRepository $manga
+    ){}
+
+    public function execute(array $data)
     {
-    }
-
-    public function execute(array $data) {
         $id = $data['id'];
         $value = $data['new_value'];
-
         $mangaExists = $this->manga->findMangaById($id);
 
         if(!$mangaExists)  {
@@ -24,8 +24,6 @@ class UpdateAuthor {
         }
 
         $manga = $this->manga->setMangaAuthor($id, $value);
-
         return $manga;
-
     }
 }
