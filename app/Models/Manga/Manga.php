@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class Manga extends Model
 {
@@ -23,15 +24,35 @@ class Manga extends Model
         'cover_image',
     ];
 
-    public function favorites(): HasOne {
+    public function favorites(): HasOne
+    {
         return $this->hasOne(Favorite::class);
     }
 
-    public function chapters(): HasMany {
+    public function chapters(): HasMany
+    {
         return $this->hasMany(Chapter::class);
     }
 
-    public function categories(): BelongsTo {
+    public function categories(): BelongsTo
+    {
         return $this->belongsTo(MangaCategory::class);
+    }
+
+    protected static function booted()
+    {
+        static::creating(
+            function($manga)
+            {
+                $manga->slug = Str::slug($manga->title);
+            }
+        );
+
+        static::updating(
+            function($manga)
+            {
+                $manga->slug = Str::slug($manga->title);
+            }
+        );
     }
 }
