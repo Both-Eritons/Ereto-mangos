@@ -68,4 +68,13 @@ class MangaRepository implements MangaContract{
         return $this->manga::where('id', $id)->delete();
     }
 
+    public function findMangaBySlug(string $slug): ?Manga
+    {
+        return $this->manga::where('slug', $slug)->first();
+    }
+
+    public function searchMangaByTitle(string $title): ?Manga
+    {
+        return $this->manga::where('title', $title)->first();
+    }
 }

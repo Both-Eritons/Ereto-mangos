@@ -7,6 +7,7 @@ use App\Actions\Manga\{
     CreateManga,
     DeleteMangaById,
     FindByAuthor,
+    FindBySlug,
     FindById,
     FindByTypes,
     UpdateType,
@@ -58,6 +59,13 @@ class MangaController extends MangaBase
     {
         $author = (string) $req->author;
         $result = $action->execute($author);
+        return $this->respondManga('Manga Encontrado', 200, $result);
+    }
+
+    public function findBySlug(Request $req, FindBySlug $action)
+    {
+        $slug = (string) $req->Slug;
+        $result = $action->execute($slug);
         return $this->respondManga('Manga Encontrado', 200, $result);
     }
 

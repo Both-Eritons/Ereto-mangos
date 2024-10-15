@@ -11,6 +11,8 @@ interface MangaContract {
     public function findMangaById(int $id): ?Manga;
     public function findMangasByAuthor(string $author): ?Collection;
     public function findMangasByType(string $type): ?Collection;
+    public function findMangaBySlug(string $slug): ?Manga;
+    public function searchMangaByTitle(string $slug): ?Manga;
 
     public function setMangaAuthor(int $id, string $author): ?bool;
     public function setMangaTitle(int $id, string $title): ?bool;
