@@ -6,6 +6,7 @@ use App\Models\Manga\Chapter;
 use App\Models\Manga\Page;
 use App\Repositories\Page\Contract\PageContract;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PageRepository implements PageContract
 {
@@ -31,6 +32,6 @@ class PageRepository implements PageContract
 
     public function findAllPagesByChapterId(int $id): ?Collection
     {
-        return $this->chapter::find($id)->page;
+        return $this->chapter::with('pages')->get();
     }
 }

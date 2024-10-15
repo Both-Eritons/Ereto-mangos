@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Chapter\ChapterController;
 use App\Http\Controllers\Manga\MangaController;
+use App\Http\Controllers\Page\PageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
-], function() {
+], function () {
     Route::post('login', [AuthController::class, 'login'])
         ->name('auth.login');
 
@@ -27,7 +28,7 @@ Route::group([
 Route::group([
     'middleware' => 'api',
     'prefix' => 'manga'
-], function() {
+], function () {
     Route::post('create', [MangaController::class, 'create'])
         ->name('manga.create');
     Route::delete('delete/{id}', [MangaController::class, 'deleteById'])
@@ -36,32 +37,47 @@ Route::group([
     Route::get('find/id/{id}', [MangaController::class, 'findById'])
         ->name('manga.find.id');
 
-    Route::get('find/type/{type}',[MangaController::class,'findByTypes'])
+    Route::get('find/type/{type}', [MangaController::class, 'findByTypes'])
         ->name('manga.find.type');
 
-    Route::get('find/author/{author}',
-        [MangaController::class,'findByAuthor'])
+    Route::get(
+        'find/author/{author}',
+        [MangaController::class, 'findByAuthor']
+    )
         ->name('manga.find.author');
 
-    Route::get('find/slug/{slug}',
-        [MangaController::class,'findBySlug'])
+    Route::get(
+        'find/slug/{slug}',
+        [MangaController::class, 'findBySlug']
+    )
         ->name('manga.find.slug');
 
-    Route::get('find/title/{title}',
-        [MangaController::class,'findByTitle'])
+    Route::get(
+        'find/title/{title}',
+        [MangaController::class, 'findByTitle']
+    )
         ->name('manga.find.title');
 
-    Route::patch('update/title', [MangaController::class,'updateTitle'])
+    Route::patch('update/title', [MangaController::class, 'updateTitle'])
         ->name('manga.update.title');
-    Route::patch('update/author', [MangaController::class,'updateAuthor'])
+    Route::patch('update/author', [MangaController::class, 'updateAuthor'])
         ->name('manga.update.author');
 
     Route::patch('update/type', [MangaController::class, 'updateType'])
         ->name('manga.update.type');
-    Route::patch('update/sinopse',[MangaController::class,'updateSinopse'])
+    Route::patch('update/sinopse', [MangaController::class, 'updateSinopse'])
         ->name('manga.update.sinopse');
 
-    Route::post('chapters/upload/{slug}/{chapter_number}',
-        [ChapterController::class, 'postChapter'])
-        ->name('chapter.upload');
+    Route::group(['prefix' => 'chapter'], function () {
+        Route::post(
+            'upload/{slug}/{chapter_number}',
+            [ChapterController::class, 'postChapter']
+        )
+            ->name('chapter.upload');
+    });
+
+    Route::group(['prefix' => 'page'], function () {
+        Route::get('find/chapter_id/{id}', [PageController::class, 'pagesByChapterID'])
+            ->name('page.all_pages_by_chapter_id');
+    });
 });
