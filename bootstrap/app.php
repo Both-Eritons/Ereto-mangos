@@ -7,6 +7,8 @@ use Illuminate\Foundation\Configuration\Middleware;
 
 use App\Exceptions\Auth\Unauthorized as Unau;
 use App\Exceptions\Manga\MangaNotExistsException as MangaNotExists;
+use App\Exceptions\Manga\PagesEmptyException;
+use App\Exceptions\Manga\SlugNotFoundException;
 use App\Exceptions\Manga\TypeNotExistsException as TypeNotExist;
 use App\Exceptions\Manga\UpdateFieldNotExistsException as UpdateField;
 use App\Exceptions\User\UserDataException as UserData;
@@ -100,6 +102,21 @@ return Application::configure(basePath: dirname(__DIR__))
         });
 
         $exceptions->render(function(UpdateField $e, Req $req) {
+            if($req->is('api/*')) {
+                return response()->json([
+                    "message" => $e->getMessage(),
+                ], $e->getCode());
+            }
+        });
+
+        $exceptions->render(function(SlugNotFoundException $e, Req $req) {
+            if($req->is('api/*')) {
+                return response()->json([
+                    "message" => $e->getMessage(),
+                ], $e->getCode());
+            }
+        });
+        $exceptions->render(function(PagesEmptyException $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
