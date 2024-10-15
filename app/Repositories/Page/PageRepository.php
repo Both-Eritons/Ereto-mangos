@@ -5,6 +5,7 @@ namespace App\Repositories\Page;
 use App\Models\Manga\Chapter;
 use App\Models\Manga\Page;
 use App\Repositories\Page\Contract\PageContract;
+use Illuminate\Database\Eloquent\Collection;
 
 class PageRepository implements PageContract
 {
@@ -28,8 +29,8 @@ class PageRepository implements PageContract
         return $this->chapter::find($id)->page;
     }
 
-    public function findAllPagesByChapterId(int $id): ?Page
+    public function findAllPagesByChapterId(int $id): ?Collection
     {
-        return $this->page;
+        return $this->chapter::find($id)->page;
     }
 }
