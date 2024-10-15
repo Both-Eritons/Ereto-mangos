@@ -30,15 +30,15 @@ class CreateChapter
         }
 
         $manga = $this->manga->findMangaBySlug($slug);
+        $this->chapter->create([
+            'manga_id' => $manga->id,
+            'title' => '',
+            'number' => $chapterNumber,
+        ]);
 
         /** @var UploadedFile $image */
         foreach ($images as $image) {
             $this->file->saveChapter($slug, $chapterNumber, $image);
-            $this->chapter->create([
-                'manga_id' => $manga->id,
-                'title' => '',
-                'number' => $chapterNumber,
-            ]);
         }
 
         return ['message' => 'Capitulo Updado com Sucesso!'];
