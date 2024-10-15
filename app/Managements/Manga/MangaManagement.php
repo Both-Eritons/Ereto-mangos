@@ -55,4 +55,10 @@ class MangaManagement {
         return $this->disk->putFileAs($path, $image,
             $image->getClientOriginalName());
     }
+
+    public function getPagesPath(string $slug, int $chapter): string
+    {
+        $slug = Str::slug($slug);
+        return $this->path."$slug/chapters/$chapter/";
+    }
 }
