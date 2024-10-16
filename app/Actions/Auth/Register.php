@@ -27,6 +27,7 @@ class Register {
 
         if(!$user) throw new UserDataException();
 
+        $user->assignRole('user');
         return $user;
 
     }
