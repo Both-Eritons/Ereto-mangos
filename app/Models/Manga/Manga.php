@@ -39,7 +39,7 @@ class Manga extends Model
         return $this->belongsTo(MangaCategory::class);
     }
 
-    protected static function booted()
+    /*protected static function booted()
     {
         static::creating(
             function($manga)
@@ -54,5 +54,5 @@ class Manga extends Model
                 $manga->slug = Str::slug($manga->title);
             }
         );
-    }
+    }*/
 }
