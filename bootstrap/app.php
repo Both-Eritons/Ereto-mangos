@@ -16,6 +16,9 @@ use App\Exceptions\User\UserExistsExeception as UserExists;
 use App\Exceptions\User\UserNotExistsExeception as UserNotExists;
 use App\Http\Middleware\ForceJsonResponse;
 use Illuminate\Http\Request as Req;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException as AccessDenied;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException as NotFound;
 
@@ -28,6 +31,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(ForceJsonResponse::class);
+        $middleware->alias([
+            'role' => RoleMiddleware::class,
+            'permission' => PermissionMiddleware::class,
+            'role_permission' => RoleOrPermissionMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
 
