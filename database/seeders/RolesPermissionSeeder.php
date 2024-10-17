@@ -40,11 +40,10 @@ class RolesPermissionSeeder extends Seeder
             PermsEnum::CREATE_CHAPTER->value,
             PermsEnum::UPDATE_CHAPTER->value,
             PermsEnum::DELETE_CHAPTER->value,
-            PermsEnum::UPLOAD_CHAPTER->value,
         ]);
 
         $uploader->givePermissionTo([
-            PermsEnum::UPLOAD_CHAPTER
+            PermsEnum::CREATE_CHAPTER
         ]);
 
         //$mod->givePermissionTo([]);
