@@ -30,7 +30,7 @@ Route::group([
     'prefix' => 'manga'
 ], function () {
     Route::post('create', [MangaController::class, 'create'])
-        ->name('manga.create');
+        ->name('manga.create')->middleware('permission:create manga');
     Route::delete('delete/{id}', [MangaController::class, 'deleteById'])
         ->name('manga.delete');
 

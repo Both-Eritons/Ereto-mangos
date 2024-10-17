@@ -16,7 +16,6 @@ use App\Actions\Manga\{
     UpdateAuthor,
     UpdateSinopse,
 };
-use App\Enums\Roles\RolesEnum;
 use App\Http\{
     Controllers\MangaBase,
     Requests\Manga\CreateMangaRequest as CreateReq,
@@ -24,14 +23,12 @@ use App\Http\{
 
 };
 use App\Http\Resources\Manga\MangaResource;
-use App\Models\User\User;
 use Illuminate\Http\Request;
 
 class MangaController extends MangaBase
 {
-    public function create(CreateReq $req, CreateManga $action, User $user)
+    public function create(CreateReq $req, CreateManga $action)
     {
-        $user->hasRole([RolesEnum::ADMIN->value]);
         $data = $req->validated();
         $result = $action->execute($data);
         $rsc = new MangaResource($result);
