@@ -25,11 +25,13 @@ class RolesPermissionSeeder extends Seeder
         $user = app(Role::class)->findOrCreate(RolesEnum::USER->value);
 
         Permission::create(['name' => PermsEnum::CREATE_MANGA->value]);
+        Permission::create(['name' => PermsEnum::FIND_MANGA->value]);
         Permission::create(['name' => PermsEnum::DELETE_MANGA->value]);
         Permission::create(['name' => PermsEnum::UPDATE_MANGA->value]);
         Permission::create(['name' => PermsEnum::DELETE_CHAPTER->value]);
         Permission::create(['name' => PermsEnum::CREATE_CHAPTER->value]);
         Permission::create(['name' => PermsEnum::UPDATE_CHAPTER->value]);
+        Permission::create(['name' => PermsEnum::FIND_CHAPTER->value]);
 
         $founder->syncPermissions(Permission::all());
 
@@ -40,14 +42,33 @@ class RolesPermissionSeeder extends Seeder
             PermsEnum::CREATE_CHAPTER->value,
             PermsEnum::UPDATE_CHAPTER->value,
             PermsEnum::DELETE_CHAPTER->value,
+            PermsEnum::FIND_CHAPTER->value,
+            PermsEnum::FIND_MANGA->value,
         ]);
 
         $uploader->givePermissionTo([
-            PermsEnum::CREATE_CHAPTER
+            PermsEnum::CREATE_CHAPTER->value,
+            PermsEnum::UPDATE_CHAPTER->value,
+            PermsEnum::UPDATE_MANGA->value,
         ]);
 
-        //$mod->givePermissionTo([]);
-        //$vip->givePermissionTo([]);
-        //$user->givePermissionTo([]);
+        $mod->givePermissionTo([
+            PermsEnum::FIND_MANGA->value,
+            PermsEnum::FIND_CHAPTER->value,
+            PermsEnum::UPDATE_CHAPTER->value,
+            PermsEnum::DELETE_CHAPTER->value,
+            PermsEnum::UPDATE_MANGA->value,
+            PermsEnum::DELETE_MANGA->value,
+
+        ]);
+
+        $vip->givePermissionTo([
+            PermsEnum::FIND_MANGA->value,
+            PermsEnum::FIND_CHAPTER->value,
+        ]);
+        $user->givePermissionTo([
+            PermsEnum::FIND_MANGA->value,
+            PermsEnum::FIND_CHAPTER->value,
+        ]);
     }
 }
