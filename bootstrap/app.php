@@ -16,6 +16,7 @@ use App\Exceptions\User\UserExistsExeception as UserExists;
 use App\Exceptions\User\UserNotExistsExeception as UserNotExists;
 use App\Http\Middleware\ForceJsonResponse;
 use Illuminate\Http\Request as Req;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 use Spatie\Permission\Middleware\PermissionMiddleware;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
@@ -37,17 +38,15 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_permission' => RoleOrPermissionMiddleware::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
-
-        $exceptions->render(function(NotFound $e, Req $req) {
+    ->withExceptions(function (Exceptions $ex) {
+        $ex->render(function(NotFound $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => 'Essa rota não existe.',
                 ], 404);
             }
         });
-
-        $exceptions->render(function(Unau $e, Req $req) {
+        $ex->render(function(Unau $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
@@ -55,80 +54,72 @@ return Application::configure(basePath: dirname(__DIR__))
             }
         });
 
-        $exceptions->render(function(UserData $e, Req $req) {
+        $ex->render(function(UserData $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-
-        $exceptions->render(function(UserNotExists $e, Req $req) {
+        $ex->render(function(UserNotExists $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-
-        $exceptions->render(function(UserExists $e, Req $req) {
+        $ex->render(function(UserExists $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-
-        $exceptions->render(function(AccessDenied $e, Req $req) {
+        $ex->render(function(AccessDenied $e, Req $req) {
                 return response()->json([
                     "message" => "Acesso Não Permitido...",
                 ], 403);
         });
-
-        $exceptions->render(function(Authenticated $e, Req $req) {
+        $ex->render(function(Authenticated $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-
-        $exceptions->render(function(MangaNotExists $e, Req $req) {
+        $ex->render(function(MangaNotExists $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-
-        $exceptions->render(function(TypeNotExist $e, Req $req) {
+        $ex->render(function(TypeNotExist $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-
-        $exceptions->render(function(UpdateField $e, Req $req) {
+        $ex->render(function(SlugNotFoundException $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-
-        $exceptions->render(function(SlugNotFoundException $e, Req $req) {
+        $ex->render(function(PagesEmptyException $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
                     "message" => $e->getMessage(),
                 ], $e->getCode());
             }
         });
-        $exceptions->render(function(PagesEmptyException $e, Req $req) {
+        $ex->render(function(UnauthorizedException $e, Req $req) {
             if($req->is('api/*')) {
                 return response()->json([
-                    "message" => $e->getMessage(),
-                ], $e->getCode());
+                    "message" => 'Você não tem permissão para continuar.'
+                ], $e->getCode() | 403);
             }
         });
 
