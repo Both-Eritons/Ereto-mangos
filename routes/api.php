@@ -32,7 +32,7 @@ Route::group([
     Route::post('create', [MangaController::class, 'create'])
         ->name('manga.create')->middleware('permission:create manga');
     Route::delete('delete/{id}', [MangaController::class, 'deleteById'])
-        ->name('manga.delete');
+        ->name('manga.delete')->middleware('permission: delete manga');
 
     Route::get('find/id/{id}', [MangaController::class, 'findById'])
         ->name('manga.find.id');
@@ -58,16 +58,24 @@ Route::group([
     )
         ->name('manga.find.title');
 
-    Route::patch('update/title', [MangaController::class, 'updateTitle'])
-        ->name('manga.update.title');
-    Route::patch('update/author', [MangaController::class, 'updateAuthor'])
-        ->name('manga.update.author');
+    Route::group(['middleware' => 'permission:update manga'],
+        function() {
+            Route::patch('update/title',
+                [MangaController::class, 'updateTitle'])
+                ->name('manga.update.title');
 
-    Route::patch('update/type', [MangaController::class, 'updateType'])
-        ->name('manga.update.type');
-    Route::patch('update/sinopse', [MangaController::class, 'updateSinopse'])
-        ->name('manga.update.sinopse');
+            Route::patch('update/author',
+                [MangaController::class, 'updateAuthor'])
+                ->name('manga.update.author');
 
+            Route::patch('update/type',
+                [MangaController::class, 'updateType'])
+                ->name('manga.update.type');
+
+            Route::patch('update/sinopse',
+                [MangaController::class, 'updateSinopse'])
+                ->name('manga.update.sinopse');
+    });
     Route::group(['prefix' => 'chapter'], function () {
         Route::post(
             'upload/{slug}/{chapter_number}',
