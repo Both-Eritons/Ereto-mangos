@@ -27,14 +27,16 @@ class CreateChapter
         $slug = $data['slug'];
         $chapterNumber = $data['chapter'];
 
-        if(!$this->manga->findMangaBySlug($slug)) throw new SlugNotFoundException();
+        $manga = $this->manga->findMangaBySlug($slug);
+        if(!$manga)
+            throw new SlugNotFoundException();
+
         $exists = $this->file->findManga($slug);
-        if (!$exists) {
+        if (!$exists && $manga) {
             $this->file->CreateMangaFolder($slug);
             $this->file->CreateChapter($slug, $chapterNumber);
         }
 
-        $manga = $this->manga->findMangaBySlug($slug);
         $chapter = $this->chapter->create([
                 'manga_id' => $manga->id,
                 'title' => '',
