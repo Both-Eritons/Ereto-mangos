@@ -104,7 +104,7 @@ Route::group([
 
     Route::group([
         'prefix' => 'chapters',
-        'middleware' => 'permission:'.PermsEnum::FIND_CHAPTER,
+        'middleware' => 'permission:'.PermsEnum::FIND_CHAPTER->value,
     ], function() {
         Route::get('mangaid/{id}',
             [ChapterController::class, 'getChaptersByMangaId'])
