@@ -34,4 +34,18 @@ class UpdateMangaRequest extends FormRequest
             'new_value' => 'required|string|min:3|max:800',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'id.required' => 'O ID é obrigatorio.',
+            'id' => 'O ID precisa ser Valido.',
+            'id.min' => 'O ID Está muito curto.',
+
+            'new_value.required' => 'O Novo Valor é obrigatorio.',
+            'new_value' => 'O novo valor precisa ser Valido.',
+            'new_value.min' => 'O Novo valor Está muito curto.',
+            'new_value.max' => 'O novo valor ultrapassou o Limite.',
+        ];
+    }
 }
