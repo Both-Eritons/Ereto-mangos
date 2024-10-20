@@ -36,7 +36,10 @@ class ChapterRepository implements ChapterContract
 
     public function getChaptersByMangaSlug(string $slug): ?Collection
     {
-        return $this->chapter::where('manga_id', $slug)->get();
+        return $this->chapter::select('chapters.*')
+        ->join('mangas', 'chapters.manga_id', '=', 'mangas.id')
+        ->where('mangas.slug', $slug)
+        ->get();
     }
 
     public function getChaptersByMangaTitle(string $title): ?Collection
