@@ -31,7 +31,7 @@ class ChapterController extends ChapterBase
         GetChaptersByMangaId $action)
     {
         $result = $action->execute(['id' => $req->id]);
-        return response([$result]);
+        return response($result);
     }
 
     public function getChaptersByMangaSlug(
@@ -39,7 +39,7 @@ class ChapterController extends ChapterBase
         GetChaptersByMangaSlug $action)
     {
         $result = $action->execute(['slug' => $req->slug]);
-        return response([$result]);
+        return response($result);
     }
 
     public function getChaptersByMangaTitle(
