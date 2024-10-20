@@ -26,4 +26,14 @@ class UploadChapterRequest extends FormRequest
             'images.*' => 'required|mimetypes:image/jpeg|max:2048'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'images.required' => 'a imagem é obrigatoria',
+            'images' => 'a imagem precisa ser valida',
+            'images.min' => 'total de imagem é inferior a 1',
+            'images.max' => 'total de imagem é superior a 20',
+        ];
+    }
 }
