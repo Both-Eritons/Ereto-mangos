@@ -28,4 +28,17 @@ class LoginRequest extends FormRequest
             'password' => 'required|string|min:6|max:30'
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'O Email é obrigatorio.',
+            'email' => 'O Email precisa ser Valido.',
+            'email.max' => 'O Email Esta muito longo',
+
+            'password.required' => 'A Senha É obrigatoria',
+            'password.min' => 'A senha Esta muito curta',
+            'password.max' => 'a Senha Está muito longa',
+        ];
+    }
 }
