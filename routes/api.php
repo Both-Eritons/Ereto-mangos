@@ -92,14 +92,29 @@ Route::group([
                 ->name('manga.update.sinopse');
         }
     );
-    Route::group(
-        ['prefix' => 'chapter',
-        'middleware' => 'permission:'.PermsEnum::CREATE_CHAPTER->value],
-        function () {
-            Route::post(
-                'upload/{slug}/{chapter_number}',
-                [ChapterController::class, 'postChapter']
-            )->name('chapter.upload');
+    Route::group([
+        'prefix' => 'chapter',
+        'middleware' => 'permission:'.PermsEnum::CREATE_CHAPTER->value
+    ],
+    function () {
+        Route::post('upload/{slug}/{chapter_number}',
+            [ChapterController::class, 'postChapter']
+        )->name('chapter.upload');
+    });
+
+    Route::group([
+        'prefix' => 'chapters',
+        'middleware' => 'permission:'.PermsEnum::FIND_CHAPTER,
+    ], function() {
+        Route::get('mangaid/{id}',
+            [ChapterController::class, 'getChaptersByMangaId'])
+            ->name('chapters.get.id');
+        Route::get('mangaslug/{slug}',
+            [ChapterController::class, 'getChaptersByMangaSlug'])
+            ->name('chapters.get.slug');
+        Route::get('mangatitle/{title}',
+            [ChapterController::class, 'getChaptersByMangaTitle'])
+            ->name('chapters.get.title');
     });
 
     Route::group(['prefix' => 'page'], function () {
