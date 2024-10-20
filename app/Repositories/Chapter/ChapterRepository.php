@@ -4,6 +4,7 @@ namespace App\Repositories\Chapter;
 
 use App\Models\Manga\Chapter;
 use App\Repositories\Chapter\Contract\ChapterContract;
+use Illuminate\Database\Eloquent\Collection;
 
 class ChapterRepository implements ChapterContract
 {
@@ -26,5 +27,20 @@ class ChapterRepository implements ChapterContract
     public function findById(int $id): ?Chapter
     {
         return $this->chapter::find($id);
+    }
+
+    public function getChaptersByMangaId(int $id): ?Collection
+    {
+        return $this->chapter::where('manga_id', $id)->get();
+    }
+
+    public function getChaptersByMangaSlug(string $slug): ?Collection
+    {
+        return $this->chapter::where('manga_id', $slug)->get();
+    }
+
+    public function getChaptersByMangaTitle(string $title): ?Collection
+    {
+        return $this->chapter::where('manga_id', $title)->get();
     }
 }
