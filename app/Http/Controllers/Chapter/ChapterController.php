@@ -12,8 +12,6 @@ use Illuminate\Support\Str;
 
 class ChapterController extends ChapterBase
 {
-
-    public function __construct() {}
     public function postChapter(Request $req, CreateChapter $action)
     {
         $array = [
@@ -24,5 +22,20 @@ class ChapterController extends ChapterBase
 
         $result = $action->execute($array);
         return response($result, 201);
+    }
+
+    public function getChaptersByMangaId(Request $req)
+    {
+
+    }
+
+    public function getChaptersByMangaSlug(Request $req)
+    {
+
+    }
+
+    public function getChaptersByMangaTitle(Request $req)
+    {
+
     }
 }
